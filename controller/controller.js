@@ -72,25 +72,22 @@ exports.updateDetails = async(req,res)=>{
   const id=req.body.id;
   const desc = req.body.desc;
   const num = req.body.num;
+  let count =0;
 
   if(num!=0)
   {
-    orders.findOneAndUpdate({_id:id},{clientNumber : num}).then((response)=>{
+    await orders.findOneAndUpdate({_id:id},{clientNumber : num}).then((response)=>{
       if(response){
-        res.status(200).send("updated");
+        count=count+1;
       }
-      else
-      res.status(400).send("something went wrong")
     });
   }
   if(desc!="#")
   {
     orders.findOneAndUpdate({_id:id},{productDesc : desc}).then((response)=>{
       if(response){
-        res.status(200).send("updated");
+        count=count+1;
       }
-      else
-      res.status(400).send("something went wrong")
     });
   }
 }
