@@ -70,8 +70,8 @@ exports.updateStatus = async(req,res)=>{
 
 exports.updateDetails = async(req,res)=>{
   const id=req.body.id;
-  const desc = req.body.desc;
   const num = req.body.num;
+  const desc = req.body.desc;
   let count =0;
 
   if(num!=0)
@@ -82,13 +82,21 @@ exports.updateDetails = async(req,res)=>{
       }
     });
   }
+
   if(desc!="#")
   {
-    orders.findOneAndUpdate({_id:id},{productDesc : desc}).then((response)=>{
+    await orders.findOneAndUpdate({_id:id},{productDesc : desc}).then((response)=>{
       if(response){
         count=count+1;
+
       }
     });
+  }
+  if(count>0){
+    res.status(200).send("updated");
+  }
+  else{
+    res.status(400).send("something went wrong");
   }
 }
 
