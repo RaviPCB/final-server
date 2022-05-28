@@ -11,6 +11,6 @@ router.get('/readyOrder',controller.getreadyOrder);
 router.get('/deliveredOrder',controller.getdeliveredOrder);
 router.put('/updateStatus',controller.updateStatus);
 router.post('/search',controller.search);
-router.put('/updatedetails',controller.updateDetail);
+router.put('/updatedetails',controller.updateDetails);
 
 module.exports = router;
