@@ -68,6 +68,33 @@ exports.updateStatus = async(req,res)=>{
   })
 }
 
+exports.updateDetails = async(req,res)=>{
+  const id=req.body.id;
+  const desc = req.body.desc;
+  const num = req.body.num;
+
+  if(num!=0)
+  {
+    orders.findOneAndUpdate({_id:id},{clientNumber : num}).then((response)=>{
+      if(response){
+        res.status(200).send("updated");
+      }
+      else
+      res.status(400).send("something went wrong")
+    });
+  }
+  if(desc!="#")
+  {
+    orders.findOneAndUpdate({_id:id},{productDesc : desc}).then((response)=>{
+      if(response){
+        res.status(200).send("updated");
+      }
+      else
+      res.status(400).send("something went wrong")
+    });
+  }
+}
+
 exports.search = async (req,res)=>{
   const num = req.body.number;
   orders.find({clientNumber:num}).sort({'updatedAt': -1}).then((response)=>{
