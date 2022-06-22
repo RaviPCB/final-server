@@ -113,7 +113,7 @@ exports.search = async (req,res)=>{
 
 exports.deleteDetails = async (req,res)=>{
   const id=req.body.id;
-  orders.remove({_id:id}).then((response)=>{
+  orders.deleteOne({_id:id}).then((response)=>{
     if(response){
       res.status(200).send(response);
     }
