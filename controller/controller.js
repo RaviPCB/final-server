@@ -110,3 +110,14 @@ exports.search = async (req,res)=>{
     res.status(400).send("something went wrong");
   })
 }
+
+exports.deleteDetails = async (req,res)=>{
+  const id=req.body.id;
+  orders.remove({_id:id}).then((response)=>{
+    if(response){
+      res.status(200).send(response);
+    }
+    else
+    res.status(400).send("something went wrong");
+  })
+}
